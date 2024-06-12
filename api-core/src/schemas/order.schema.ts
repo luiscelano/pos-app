@@ -1,23 +1,42 @@
-import { Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
 
 export type OrderDocument = HydratedDocument<Order>;
 
-class OrderItem {
+export class OrderItem {
+  @Prop()
   productId: string;
+  @Prop()
   title: string;
+  @Prop()
   imageURL: string;
+  @Prop()
   quantity: number;
+  @Prop()
   price: number;
+}
+
+export const OrderItemSchema = SchemaFactory.createForClass(OrderItem);
+
+export enum OrderStatus {
+  Pending = 'Pending',
+  Finished = 'Finished',
+  InProgress = 'InProgress',
 }
 
 @Schema()
 export class Order {
-  orderId: string;
+  @Prop()
   orderNumber: number;
+  @Prop()
   orderTotal: number;
+  @Prop()
+  totalItemQuantity: number;
+  @Prop({ type: [OrderItem], default: [] })
   items: OrderItem[];
+  @Prop()
   status: string;
+  @Prop()
   createdAt: Date;
 }
 

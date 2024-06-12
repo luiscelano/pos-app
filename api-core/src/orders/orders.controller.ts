@@ -1,5 +1,6 @@
-import { Controller, Get } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { OrdersService } from './orders.service';
+import { PlaceOrderInputDto } from 'src/dtos/place-order-input.dto';
 
 @Controller('orders')
 export class OrdersController {
@@ -8,5 +9,10 @@ export class OrdersController {
   @Get('/')
   getOrders() {
     return this.ordersService.getOrders();
+  }
+
+  @Post('/')
+  placeOrder(@Body() body: PlaceOrderInputDto) {
+    return this.ordersService.placeOrder(body);
   }
 }
