@@ -3,22 +3,21 @@ import React from 'react'
 import * as styles from './styles'
 import { dateFormatter } from 'src/utils/dateFormatter'
 
-const timeOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
-
 const OrderItem = ({ order }) => {
   return (
     <Grid item md={12}>
       <Card
+        variant="outlined"
         elevation={0}
         sx={{
-          background: 'black',
-          color: 'white',
+          background: '#f9a825',
+          //   color: 'white',
           cursor: 'pointer',
           ':hover': {
-            background: '#424242'
+            background: '#fff9c4'
           },
           ':active': {
-            background: 'black'
+            background: 'white'
           }
         }}>
         <CardContent>

@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 
 const statusColor = {
-  Pending: '#f9a825',
-  'In Progress': '#0091ea',
+  Pending: 'black',
+  'In Progress': '#01579b',
   Finished: '#43a047'
 }
 
@@ -28,5 +28,6 @@ export const StatusElement = styled.div`
   padding-right: 10px;
   border-radius: 10px;
   font-size: 14px;
+  color: white;
   background: ${(props) => statusColor[props.status] || '#f9a825'};
 `
