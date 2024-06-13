@@ -14,7 +14,6 @@ export class ProductsService {
   @MapperDecorator(GetProductsResponseDto)
   async getProducts(): Promise<any> {
     const result = await this.productsModel.find().exec();
-    console.log(result.map((item) => item.toJSON()));
     return result.map((item) => ({ ...item.toJSON(), _id: item.id }));
   }
 }
