@@ -54,7 +54,7 @@ const withProducts = (Component) => (props) => {
         })
       }
     },
-    [navigate]
+    [navigate, dispatch]
   )
 
   useEffect(() => {
