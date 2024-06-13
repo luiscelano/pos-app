@@ -21,7 +21,7 @@ export const OrderItemSchema = SchemaFactory.createForClass(OrderItem);
 export enum OrderStatus {
   Pending = 'Pending',
   Finished = 'Finished',
-  InProgress = 'InProgress',
+  InProgress = 'In Progress',
 }
 
 @Schema()

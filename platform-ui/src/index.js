@@ -4,9 +4,27 @@ import App from './App'
 import { Provider } from 'react-redux'
 import setupStore from './redux/store'
 import reportWebVitals from './reportWebVitals'
-import { ThemeProvider, createGlobalStyle } from 'styled-components'
+import { ThemeProvider as StyledThemeProvider, createGlobalStyle } from 'styled-components'
 import globalStyles from 'src/config/globalStyles'
 import theme from 'src/config/theme'
+import { ThemeProvider, createTheme } from '@mui/material/styles'
+
+const muiTheme = createTheme({
+  palette: {
+    primary: {
+      light: '#757ce8',
+      main: '#000000',
+      dark: '#002884',
+      contrastText: '#fff'
+    },
+    secondary: {
+      light: '#ff7961',
+      main: '#ffffff',
+      dark: '#ba000d',
+      contrastText: '#000'
+    }
+  }
+})
 
 const store = setupStore()
 
@@ -16,9 +34,11 @@ const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <ThemeProvider theme={theme}>
-        <App />
-        <GlobalStyle />
+      <ThemeProvider theme={muiTheme}>
+        <StyledThemeProvider theme={theme}>
+          <App />
+          <GlobalStyle />
+        </StyledThemeProvider>
       </ThemeProvider>
     </Provider>
   </React.StrictMode>
