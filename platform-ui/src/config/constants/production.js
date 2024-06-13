@@ -1,1 +1,1 @@
-export const API_URL = 'http://localhost:3000'
+export const API_URL = 'https://api-core-inky.vercel.app'
