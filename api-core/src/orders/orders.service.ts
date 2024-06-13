@@ -3,6 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { plainToInstance } from 'class-transformer';
 import { Model } from 'mongoose';
 import MapperDecorator from 'src/decorators/mapper.decorator';
+import { GetOrdersResponseDto } from 'src/dtos/get-orders-response.dto';
 import { OrderItemsDto } from 'src/dtos/order-items.dto';
 import { PlaceOrderInputDto } from 'src/dtos/place-order-input.dto';
 import { PlaceOrderResponseDto } from 'src/dtos/place-order-response.dto';
@@ -17,8 +18,11 @@ export class OrdersService {
     @InjectModel(Order.name) private ordersModel: Model<Product>,
     @InjectModel(Counter.name) private counterModel: Model<Counter>,
   ) {}
-  getOrders() {
-    return 'orders';
+
+  @MapperDecorator(GetOrdersResponseDto)
+  async getOrders() {
+    const result = await this.ordersModel.find().exec();
+    return result.map((item) => ({ ...item.toJSON(), _id: item.id }));
   }
 
   @MapperDecorator(PlaceOrderResponseDto)

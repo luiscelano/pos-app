@@ -4,6 +4,7 @@ import Profile from 'src/views/app/profile'
 import Auth from 'src/views/auth'
 import AppLayout from 'src/components/AppLayout'
 import Posts from 'src/views/app/posts'
+import Orders from './views/app/orders'
 
 const routes = createBrowserRouter([
   {
@@ -29,6 +30,10 @@ const routes = createBrowserRouter([
       {
         path: 'posts',
         Component: Posts
+      },
+      {
+        path: 'orders',
+        Component: Orders
       }
     ]
   },
