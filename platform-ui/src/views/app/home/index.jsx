@@ -2,6 +2,7 @@ import React from 'react'
 import { Grid } from '@mui/material'
 import withProducts from 'src/containers/products/withProducts'
 import { ProductsList } from 'src/components/ProductsList'
+import CartSummary from 'src/components/CartSummary'
 
 const Home = (props) => {
   return (
@@ -10,7 +11,7 @@ const Home = (props) => {
         <ProductsList products={props.products} />
       </Grid>
       <Grid item md={4} xs={12}>
-        cart summary
+        <CartSummary loading={props.isPlacingOrder} placeOrder={props.placeOrder} />
       </Grid>
     </Grid>
   )

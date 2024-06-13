@@ -5,7 +5,7 @@ import { dateFormatter } from 'src/utils/dateFormatter'
 
 const OrderItem = ({ order }) => {
   return (
-    <Grid item md={12}>
+    <Grid item md={12} xs={12}>
       <Card
         variant="outlined"
         elevation={0}
@@ -22,13 +22,13 @@ const OrderItem = ({ order }) => {
         }}>
         <CardContent>
           <styles.RowContainer>
-            <styles.ColumnContainer alignItems="flex-start">
+            <styles.ColumnContainer alignitems="flex-start">
               <Typography variant="h4">{`Orden no #${order.orderNumber}`}</Typography>
               <Typography variant="caption" sx={{ fontWeight: '700' }}>
                 {dateFormatter(order.createdAt)}
               </Typography>
             </styles.ColumnContainer>
-            <styles.ColumnContainer alignItems="flex-end">
+            <styles.ColumnContainer alignitems="flex-end">
               <styles.StatusElement status={order.status}>{order.status}</styles.StatusElement>
               <Typography variant="body1">{`Q.${order.orderTotal.toFixed(2)}`}</Typography>
             </styles.ColumnContainer>

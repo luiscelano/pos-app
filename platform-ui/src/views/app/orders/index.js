@@ -5,7 +5,7 @@ import withOrders from 'src/containers/orders/withOrders'
 
 const Orders = (props) => {
   return (
-    <Container>
+    <Container maxWidth="sm">
       <OrdersList orders={props.orders} />
     </Container>
   )

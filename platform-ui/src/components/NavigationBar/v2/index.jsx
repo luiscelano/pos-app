@@ -9,11 +9,21 @@ import MenuIcon from '@mui/icons-material/Menu'
 import Container from '@mui/material/Container'
 import Button from '@mui/material/Button'
 import MenuItem from '@mui/material/MenuItem'
-import AdbIcon from '@mui/icons-material/Adb'
+import { NavLink, useLocation } from 'react-router-dom'
 
-const pages = ['Ordenes', 'Nueva Orden']
+const pages = [
+  {
+    label: 'Ordenes',
+    path: '/app/orders'
+  },
+  {
+    label: 'Nueva Orden',
+    path: '/app/home'
+  }
+]
 
 const NavigationBar = () => {
+  const location = useLocation()
   const [anchorElNav, setAnchorElNav] = React.useState(null)
 
   const handleOpenNavMenu = (event) => {
@@ -25,7 +35,7 @@ const NavigationBar = () => {
   }
 
   return (
-    <AppBar position="static">
+    <AppBar position="sticky">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography
@@ -73,9 +83,11 @@ const NavigationBar = () => {
                 display: { xs: 'block', md: 'none' }
               }}>
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
+                <NavLink style={{ textDecoration: 'none', color: 'black' }} to={page.path} key={page.label}>
+                  <MenuItem onClick={handleCloseNavMenu}>
+                    <Typography textAlign="center">{page.label}</Typography>
+                  </MenuItem>
+                </NavLink>
               ))}
             </Menu>
           </Box>
@@ -98,9 +110,13 @@ const NavigationBar = () => {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
-              <Button key={page} onClick={handleCloseNavMenu} sx={{ my: 2, color: 'white', display: 'block' }}>
-                {page}
-              </Button>
+              <NavLink style={{ textDecoration: 'none' }} to={page.path} key={page.label}>
+                <Button
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2, color: location.pathname.includes(page.path) ? '#f9a825' : 'white', display: 'block' }}>
+                  {page.label}
+                </Button>
+              </NavLink>
             ))}
           </Box>
         </Toolbar>

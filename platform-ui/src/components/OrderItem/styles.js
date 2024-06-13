@@ -18,7 +18,7 @@ export const ColumnContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: ${(props) => props.alignItems};
+  align-items: ${({ alignitems }) => alignitems};
   height: 100%;
 `
 

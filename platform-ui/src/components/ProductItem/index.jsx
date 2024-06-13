@@ -1,11 +1,17 @@
 import { Button, Card, CardActions, CardContent, CardMedia, Grid, Typography } from '@mui/material'
 import React from 'react'
+import { useDispatch } from 'react-redux'
+import * as cartActions from 'src/redux/cart/actions'
 
 export const ProductItem = ({ product }) => {
+  const dispatch = useDispatch()
+
+  const addProductToCart = () => dispatch(cartActions.addProductToCart(product))
+
   return (
-    <Grid item md={3} xs={6}>
+    <Grid item md={4} xs={6}>
       <Card elevation={0}>
-        <CardMedia sx={{ height: 140, objectFit: 'contain' }} image={product.imageURL} title="green iguana" />
+        <CardMedia sx={{ height: 240, objectFit: 'contain' }} image={product.imageURL} title="green iguana" />
         <CardContent>
           <Typography variant="h6" component="div">
             {product.title}
@@ -23,7 +29,7 @@ export const ProductItem = ({ product }) => {
           </Typography>
         </CardContent>
         <CardActions>
-          <Button sx={{ width: '100%' }} size="small" variant="contained" disableElevation>
+          <Button sx={{ width: '100%' }} size="small" variant="contained" disableElevation onClick={addProductToCart}>
             Agregar
           </Button>
         </CardActions>

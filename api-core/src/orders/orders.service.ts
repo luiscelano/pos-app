@@ -21,7 +21,10 @@ export class OrdersService {
 
   @MapperDecorator(GetOrdersResponseDto)
   async getOrders() {
-    const result = await this.ordersModel.find().exec();
+    const result = await this.ordersModel
+      .find(null, null, { sort: { createdAt: -1 } })
+      .exec();
+
     return result.map((item) => ({ ...item.toJSON(), _id: item.id }));
   }
 
