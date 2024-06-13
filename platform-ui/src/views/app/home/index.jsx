@@ -1,24 +1,19 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
-import * as counterActions from 'src/redux/counter/actions'
-import withExampleContent from 'src/containers/withExampleContent'
+import { Grid } from '@mui/material'
+import withProducts from 'src/containers/products/withProducts'
+import { ProductsList } from 'src/components/ProductsList'
 
-const Home = () => {
-  const dispatch = useDispatch()
-
+const Home = (props) => {
   return (
-    <>
-      <button aria-label="Increment value" onClick={() => dispatch(counterActions.incrementCounter())}>
-        Increment
-      </button>
-      <button aria-label="Decrement value" onClick={() => dispatch(counterActions.decrementCounter())}>
-        Decrement
-      </button>
-      <button aria-label="IncrementByAmount value" onClick={() => dispatch(counterActions.incrementCounterByAmount(2))}>
-        Increment by amount of 2
-      </button>
-    </>
+    <Grid container spacing={3}>
+      <Grid item md={8} xs={12}>
+        <ProductsList products={props.products} />
+      </Grid>
+      <Grid item md={4} xs={12}>
+        cart summary
+      </Grid>
+    </Grid>
   )
 }
 
-export default withExampleContent(Home)
+export default withProducts(Home)
