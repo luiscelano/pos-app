@@ -5,8 +5,10 @@ import withError from 'src/containers/error/withError'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import * as cartActions from 'src/redux/cart/actions'
+import { useSnackbar } from 'notistack'
 
 const withProducts = (Component) => (props) => {
+  const { enqueueSnackbar } = useSnackbar()
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const [isLoading, setIsLoading] = useState(false)
@@ -41,7 +43,10 @@ const withProducts = (Component) => (props) => {
         const response = await httpClient.post('/orders', { items })
         setIsPlacingOrder(false)
         if (response.status === 201) {
-          alert(`Orden no. ${response.data.orderNumber} creada!`)
+          enqueueSnackbar(`Orden no. ${response.data.orderNumber} creada!`, {
+            autoHideDuration: 2000,
+            variant: 'success'
+          })
           navigate('/app/orders')
           dispatch(cartActions.clearCart())
         }

@@ -1,11 +1,13 @@
-import { Button, Divider, Grid, Paper, Typography } from '@mui/material'
+import { Button, Divider, Grid, Paper, Typography, useTheme } from '@mui/material'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import * as cartSelectors from 'src/redux/cart/selectors'
 import CartItems from '../CartItems'
 import * as styles from './styles'
+import { BeatLoader } from 'react-spinners'
 
 const CartSummary = ({ placeOrder, loading }) => {
+  const theme = useTheme()
   const cartItems = useSelector(cartSelectors.getCartItemsSelector)
 
   const orderTotal = Array.from(cartItems || []).reduce((sum, current) => sum + current.price * current.quantity, 0)
@@ -14,7 +16,13 @@ const CartSummary = ({ placeOrder, loading }) => {
     <Paper variant="outlined">
       <Grid container spacing={3}>
         <Grid item xs={12} md={12}>
-          {cartItems.length ? <CartItems items={cartItems} /> : <div>el carrito esta vacio</div>}
+          {cartItems.length ? (
+            <CartItems items={cartItems} />
+          ) : (
+            <Grid container padding={2} justifyContent="center">
+              <Typography variant="h6">El carrito está vacío</Typography>
+            </Grid>
+          )}
         </Grid>
         <Grid item xs={12} md={12}>
           <Divider />
@@ -32,15 +40,19 @@ const CartSummary = ({ placeOrder, loading }) => {
               xs={12}
               md={12}
               sx={{ display: 'flex', padding: '15px', flexDirection: 'row', justifyContent: 'center' }}>
-              <Button
-                sx={{ width: '100%' }}
-                size="large"
-                variant="contained"
-                disabled={!cartItems.length || loading}
-                disableElevation
-                onClick={() => placeOrder(cartItems)}>
-                Crear orden
-              </Button>
+              {!loading ? (
+                <Button
+                  sx={{ width: '100%' }}
+                  size="large"
+                  variant="contained"
+                  disabled={!cartItems.length}
+                  disableElevation
+                  onClick={() => placeOrder(cartItems)}>
+                  Crear orden
+                </Button>
+              ) : (
+                <BeatLoader color={'#f9a825'} />
+              )}
             </Grid>
           </Grid>
         </Grid>

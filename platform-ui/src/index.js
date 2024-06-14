@@ -8,6 +8,7 @@ import { ThemeProvider as StyledThemeProvider, createGlobalStyle } from 'styled-
 import globalStyles from 'src/config/globalStyles'
 import theme from 'src/config/theme'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
+import { SnackbarProvider } from 'notistack'
 
 const muiTheme = createTheme({
   palette: {
@@ -36,7 +37,9 @@ root.render(
     <Provider store={store}>
       <ThemeProvider theme={muiTheme}>
         <StyledThemeProvider theme={theme}>
-          <App />
+          <SnackbarProvider>
+            <App />
+          </SnackbarProvider>
           <GlobalStyle />
         </StyledThemeProvider>
       </ThemeProvider>

@@ -10,6 +10,7 @@ const withOrders = (Component) => (props) => {
     message: null
   })
   const [orders, setOrders] = useState(null)
+  const [selectedOrder, setSelectedOrder] = useState(null)
   const ordersRef = useRef(false)
 
   const getOrders = useCallback(async () => {
