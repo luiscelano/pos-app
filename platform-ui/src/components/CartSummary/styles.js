@@ -5,5 +5,5 @@ export const OrderSummaryContainer = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 15px;
+  padding-bottom: 15px;
 `

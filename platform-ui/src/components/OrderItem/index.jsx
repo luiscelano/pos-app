@@ -2,8 +2,10 @@ import { Card, CardContent, Grid, Typography } from '@mui/material'
 import React from 'react'
 import * as styles from './styles'
 import { dateFormatter } from 'src/utils/dateFormatter'
+import { useNavigate } from 'react-router-dom'
 
 const OrderItem = ({ order }) => {
+  const navigate = useNavigate()
   return (
     <Grid item md={12} xs={12}>
       <Card
@@ -19,7 +21,8 @@ const OrderItem = ({ order }) => {
           ':active': {
             background: 'white'
           }
-        }}>
+        }}
+        onClick={() => navigate(`/app/orders?orderId=${order.orderId}`)}>
         <CardContent>
           <styles.RowContainer>
             <styles.ColumnContainer alignitems="flex-start">

@@ -2,16 +2,19 @@ import { useEffect, useState, useRef, useCallback } from 'react'
 import withSpinner from 'src/containers/spinner/withSpinner'
 import httpClient from 'src/utils/httpClient'
 import withError from 'src/containers/error/withError'
+import useQueryParams from 'src/utils/useQueryParams'
 
 const withOrders = (Component) => (props) => {
+  const query = useQueryParams()
   const [isLoading, setIsLoading] = useState(false)
   const [errorState, setErrorState] = useState({
     failed: false,
     message: null
   })
-  const [orders, setOrders] = useState(null)
+  const [orders, setOrders] = useState([])
   const [selectedOrder, setSelectedOrder] = useState(null)
   const ordersRef = useRef(false)
+  const orderId = query.get('orderId')
 
   const getOrders = useCallback(async () => {
     try {
@@ -37,9 +40,19 @@ const withOrders = (Component) => (props) => {
 
   useEffect(() => {
     if (isLoading && (orders || errorState.failed)) setIsLoading(false)
+    if (orderId) {
+      setSelectedOrder(orders.find((order) => order.orderId === orderId))
+    }
   }, [orders, errorState, isLoading])
 
-  const componentProps = { ...props, orders }
+  useEffect(() => {
+    if (!orderId) setSelectedOrder(null)
+    else if (orderId) {
+      setSelectedOrder(orders.find((order) => order.orderId === orderId))
+    }
+  }, [orderId])
+
+  const componentProps = { ...props, orders, selectedOrder }
 
   return withSpinner(isLoading)(withError(errorState.failed, errorState.message)(Component))(componentProps)
 }

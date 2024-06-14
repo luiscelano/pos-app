@@ -1,4 +1,4 @@
-import { Button, Divider, Grid, Paper, Typography, useTheme } from '@mui/material'
+import { Button, Divider, Grid, Paper, Typography } from '@mui/material'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import * as cartSelectors from 'src/redux/cart/selectors'
@@ -7,19 +7,18 @@ import * as styles from './styles'
 import { BeatLoader } from 'react-spinners'
 
 const CartSummary = ({ placeOrder, loading }) => {
-  const theme = useTheme()
   const cartItems = useSelector(cartSelectors.getCartItemsSelector)
 
   const orderTotal = Array.from(cartItems || []).reduce((sum, current) => sum + current.price * current.quantity, 0)
 
   return (
     <Paper variant="outlined">
-      <Grid container spacing={3}>
+      <Grid container padding={2} spacing={3}>
         <Grid item xs={12} md={12}>
           {cartItems.length ? (
             <CartItems items={cartItems} />
           ) : (
-            <Grid container padding={2} justifyContent="center">
+            <Grid container justifyContent="center">
               <Typography variant="h6">El carrito está vacío</Typography>
             </Grid>
           )}
@@ -35,11 +34,7 @@ const CartSummary = ({ placeOrder, loading }) => {
                 <Typography variant="h5">{`Q${orderTotal.toFixed(2)}`}</Typography>
               </styles.OrderSummaryContainer>
             </Grid>
-            <Grid
-              item
-              xs={12}
-              md={12}
-              sx={{ display: 'flex', padding: '15px', flexDirection: 'row', justifyContent: 'center' }}>
+            <Grid item xs={12} md={12} sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
               {!loading ? (
                 <Button
                   sx={{ width: '100%' }}

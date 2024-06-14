@@ -5,7 +5,6 @@ export const CartItemContainer = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 15px;
 `
 
 export const CartItemLeading = styled.div`
