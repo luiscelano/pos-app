@@ -6,7 +6,7 @@ import useQueryParams from 'src/utils/useQueryParams'
 
 const withOrders = (Component) => (props) => {
   const query = useQueryParams()
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
   const [errorState, setErrorState] = useState({
     failed: false,
     message: null
@@ -40,9 +40,6 @@ const withOrders = (Component) => (props) => {
 
   useEffect(() => {
     if (isLoading && (orders || errorState.failed)) setIsLoading(false)
-    if (orderId) {
-      setSelectedOrder(orders.find((order) => order.orderId === orderId))
-    }
   }, [orders, errorState, isLoading])
 
   useEffect(() => {
@@ -50,7 +47,7 @@ const withOrders = (Component) => (props) => {
     else if (orderId) {
       setSelectedOrder(orders.find((order) => order.orderId === orderId))
     }
-  }, [orderId])
+  }, [orderId, orders])
 
   const componentProps = { ...props, orders, selectedOrder }
 

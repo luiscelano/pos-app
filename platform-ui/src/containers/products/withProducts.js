@@ -11,7 +11,7 @@ const withProducts = (Component) => (props) => {
   const { enqueueSnackbar } = useSnackbar()
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
   const [isPlacingOrder, setIsPlacingOrder] = useState(false)
   const [errorState, setErrorState] = useState({
     failed: false,
@@ -47,7 +47,7 @@ const withProducts = (Component) => (props) => {
             autoHideDuration: 2000,
             variant: 'success'
           })
-          navigate('/app/orders')
+          navigate(`/app/orders?orderId=${response.data.orderId}`)
           dispatch(cartActions.clearCart())
         }
       } catch (error) {
@@ -59,7 +59,7 @@ const withProducts = (Component) => (props) => {
         })
       }
     },
-    [navigate, dispatch]
+    [navigate, dispatch, enqueueSnackbar]
   )
 
   useEffect(() => {

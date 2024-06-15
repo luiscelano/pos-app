@@ -26,7 +26,11 @@ const Orders = ({ orders, selectedOrder }) => {
           </Grid>
         )}
         {selectedOrder && !matches && (
-          <SwipeableDrawer anchor="bottom" open={selectedOrder} onClose={() => navigate('/app/orders')}>
+          <SwipeableDrawer
+            anchor="bottom"
+            open={Boolean(selectedOrder)}
+            onOpen={() => {}}
+            onClose={() => navigate('/app/orders')}>
             <OrderSummary order={selectedOrder} />
           </SwipeableDrawer>
         )}

@@ -62,7 +62,8 @@ export class OrdersService {
       createdAt: Date.now(),
     };
     const createdOrder = new this.ordersModel(body);
-    return createdOrder.save();
+    const createdOrderResponse = await createdOrder.save();
+    return { ...createdOrderResponse.toJSON(), _id: createdOrderResponse.id };
   }
 
   private getOrderSequence(): Promise<any> {

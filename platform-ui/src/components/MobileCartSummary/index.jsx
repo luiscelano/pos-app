@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Global } from '@emotion/react'
 import { styled } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline'
@@ -8,6 +8,8 @@ import SwipeableDrawer from '@mui/material/SwipeableDrawer'
 import CartSummary from '../CartSummary'
 import { useSelector } from 'react-redux'
 import * as cartSelectors from 'src/redux/cart/selectors'
+import { BeatLoader } from 'react-spinners'
+import { Grid } from '@mui/material'
 
 const drawerBleeding = 56
 
@@ -72,10 +74,17 @@ const MobileCartSummary = ({ loading, placeOrder, ...props }) => {
             borderTopRightRadius: 8,
             visibility: 'visible',
             right: 0,
-            left: 0
+            left: 0,
+            background: 'black'
           }}>
           <Puller />
-          <Typography sx={{ p: 2, color: 'text.secondary' }}>{`Total Q${orderTotal.toFixed(2)}`}</Typography>
+          {!loading ? (
+            <Typography variant="h6" sx={{ p: 2, color: 'white' }}>{`Total Q${orderTotal.toFixed(2)}`}</Typography>
+          ) : (
+            <Grid container justifyContent="center" padding={3}>
+              <BeatLoader color={'#f9a825'} />
+            </Grid>
+          )}
         </StyledBox>
         <StyledBox
           sx={{

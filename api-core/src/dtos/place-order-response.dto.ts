@@ -15,6 +15,8 @@ export class OrderItemDto implements OrderItem {
 }
 
 export class PlaceOrderResponseDto implements Order {
+  @Expose({ name: '_id' })
+  orderId: string;
   @Expose()
   orderNumber: number;
   @Expose()
