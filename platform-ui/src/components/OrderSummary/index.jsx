@@ -12,7 +12,7 @@ const OrderSummary = ({ order }) => {
           </Grid>
         </Grid>
         <Grid item xs={12}>
-          <Grid container padding={2}>
+          <Grid container sx={{ paddingTop: '15px', paddingBottom: '15px' }}>
             {Array.from(order.items || []).map((orderItem, index) => (
               <Grid item xs={12} key={`selected-order-item-${index}`}>
                 <styles.OrderItemContainer>

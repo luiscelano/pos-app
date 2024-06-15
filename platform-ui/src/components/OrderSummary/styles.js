@@ -6,6 +6,7 @@ export const OrderItemContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   gap: 10px;
+  padding-top: 15px;
 `
 
 export const OrderItemTitleContainer = styled.div`

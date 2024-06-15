@@ -11,7 +11,7 @@ const Orders = ({ orders, selectedOrder }) => {
   const navigate = useNavigate()
 
   return (
-    <Container maxWidth={selectedOrder ? 'lg' : 'sm'}>
+    <Container maxWidth={selectedOrder ? 'lg' : 'sm'} sx={{ padding: matches ? 'auto' : 0 }}>
       <Grid container spacing={3}>
         <Grid item xs={12} md={selectedOrder ? 6 : 12}>
           <OrdersList orders={orders} />
