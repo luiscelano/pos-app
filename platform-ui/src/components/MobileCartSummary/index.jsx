@@ -63,6 +63,7 @@ const MobileCartSummary = ({ loading, placeOrder, ...props }) => {
         onOpen={toggleDrawer(true)}
         swipeAreaWidth={drawerBleeding}
         disableSwipeToOpen={false}
+        onClick={toggleDrawer(true)}
         ModalProps={{
           keepMounted: true
         }}>
